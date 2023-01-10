@@ -1,0 +1,42 @@
+<h1 class="text-center mt-4">Agregar producto</h1>
+<hr>
+
+<form action="" [formGroup]="miFormulario">
+    <div class="row g-3 align-items-center mb-3">
+        <div class="col-auto">
+            <label for="" class="col-from-label">Nombre:</label>
+        </div>
+
+        <div class="col-auto">
+            <input class="form-control" type="text" formControlName="nombre">
+        </div>
+
+        <div class="col-auto">
+            <span ErrorMsgD [mensaje]="texto" [color]="color" [valido]="!tieneError('nombre')"></span>
+
+            <!-- color="blue" mensaje="Este Campo es requerido"   se puede poner valores por defecto en la directiva para no llenar el span de variables -->
+        </div>
+        <!-- cuando se envía la variable sin corchetes se atrapara en la directiva hija con input, adicionalmente si se envía con corchete [] apuntara a una variable de un mismo componente -->
+        <!-- *ngIf="miFormulario.get('nombre')?.invalid" -->
+    </div>
+
+    <div class="row mt-3">
+        <div class="col">
+            <button type="submit" class="btn btn-dark m-2" (click)="cambiarNombre()">Guardar</button>
+
+            <button type="submit" class="btn btn-dark" (click)="cambiarColor()">Color</button>
+        </div>
+    </div>
+</form>
+
+<h3 class="mt-5" ErrorMsgD color="orange">Formulario</h3>
+<pre>Valid: {{miFormulario.valid}}</pre>
+<pre>Valid: {{miFormulario.value | json}}</pre>
+
+<div class="row" *appCustomIf="miFormulario.valid">
+    <div class="col">
+        <div class="alert alert-danger">
+            Todo correcto!
+        </div>
+    </div>
+</div>
